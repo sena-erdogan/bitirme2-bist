@@ -27,44 +27,110 @@
   <script type="text/javascript"
     src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.15/dataRender/datetime.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .top-left,
+    .top-right,
+    .bottom-left,
+    .bottom-right {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .top-left {
+      top: 0;
+      left: 0;
+      background-color: #dddddd;
+    }
+
+    .bottom-left {
+      bottom: 0;
+      left: 0;
+      background-color: #f2f2f2;
+    }
+
+    .top-right {
+      top: 0;
+      right: 0;
+      background-color: #f2f2f2;
+    }
+
+    .bottom-right {
+      bottom: 0;
+      right: 0;
+      background-color: #dddddd;
+    }
+
+    .section-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .section-content h1 {
+      margin-bottom: 1rem;
+    }
+
+    .homebutton {
+      margin-top: 1rem;
+    }
+  </style>
 </head>
 
 <body>
-  <div class="container">
-    <h1>Veri Görüntülemek İçin Platform Seçin</h1>
+  <div class="page">
+    <div class="top-left">
+      <div class="section-content">
+        <h1>Veri Görüntülemek İçin Platform Seçin</h1>
 
-    <a href="hometwt.html" class="homebutton">Twitter</a>
-    <a href="hometlg.html" class="homebutton">Telegram</a>
-    <a href="homeinv.html" class="homebutton">tr.investing</a>
+        <a href="hometwt.html" class="homebutton">Twitter</a>
+        <a href="hometlg.html" class="homebutton">Telegram</a>
+        <a href="homeinv.html" class="homebutton">tr.investing</a>
+      </div>
+    </div>
+    <div class="top-right">
+      <div class="section-content">
+        <h1><br>Veri Etiketlemek İçin Platform Seçin</h1>
 
-    <h1><br>Veri Etiketlemek İçin Platform Seçin</h1>
+        <a href="labeltwt.html" class="homebutton">Twitter</a>
+        <a href="labeltlg.html" class="homebutton">Telegram</a>
+        <a href="labelinv.html" class="homebutton">tr.investing</a>
+      </div>
+    </div>
 
-    <a href="labeltwt.html" class="homebutton">Twitter</a>
-    <a href="labeltlg.html" class="homebutton">Telegram</a>
-    <a href="labelinv.html" class="homebutton">tr.investing</a>
+    <div class="bottom-left">
+      <div class="section-content">
+        <h1><br>Dosya Yüklemek İçin Platform Seçin</h1>
 
-    <h1><br>Dosya Yüklemek İçin Platform Seçin</h1>
+        <a href="fileuploadtwt.html" class="homebutton">Twitter</a>
+        <a href="fileuploadtlg.html" class="homebutton">Telegram</a>
+        <a href="fileuploadinv.html" class="homebutton">tr.investing</a>
+      </div>
+    </div>
 
-    <a href="fileuploadtwt.html" class="homebutton">Twitter</a>
-    <a href="fileuploadtlg.html" class="homebutton">Telegram</a>
-    <a href="fileuploadinv.html" class="homebutton">tr.investing</a>
+    <div class="bottom-right">
+      <div class="section-content">
+        <h1><br>Piyasa Verisi Yükleyin</h1>
 
-    <h1><br>Piyasa Verisi Yükleyin</h1>
-
-    <a href="hometwt.html" class="homebutton">Piyasa</a>
+        <a href="hometwt.html" class="homebutton">Piyasa</a>
+      </div>
+    </div>
   </div>
 </body>
-
-<style>
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .homebutton {
-    margin-bottom: 20px;
-  }
-</style>
 
 </html>
