@@ -1,0 +1,156 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+td {
+    border: 1px solid #ddd;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+a.homebutton {
+    display: inline-block;
+    padding: 0.5em 1em;
+    background-color: rgb(0, 159, 195);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+a.homebutton:hover {
+    background-color: rgba(0, 159, 195, 0.479);
+    color: #fff;
+}
+
+a.twtuserbutton {
+    display: inline-block;
+    padding: 0.5em 1em;
+    background-color: rgb(0, 159, 195);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.twtlabelbutton {
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: rgb(0, 159, 195);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.twtlabelbutton:hover {
+    background-color: rgba(0, 159, 195, 0.479);
+    color: #fff;
+}
+
+a.tlguserbutton {
+    display: inline-block;
+    padding: 0.5em 1em;
+    background-color: rgb(0, 159, 195);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.tlglabelbutton {
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: rgb(0, 159, 195);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.tlglabelbutton:hover {
+    background-color: rgba(0, 159, 195, 0.479);
+    color: #fff;
+}
+
+a.invuserbutton {
+    display: inline-block;
+    padding: 0.5em 1em;
+    background-color: rgb(0, 159, 195);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.invlabelbutton {
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: rgb(0, 159, 195);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.invlabelbutton:hover {
+    background-color: rgba(0, 159, 195, 0.479);
+    color: #fff;
+}
+
+.container {
+    text-align: center;
+    margin-bottom: 20px;
+    /* Decrease the margin to bring the buttons closer to the bottom */
+}
+
+.label-buttons {
+    position: fixed;
+    bottom: 0;
+    /* Set the bottom to 0 to place the buttons at the bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    color: #fff;
+}
+
+#label-table-twt tbody tr {
+    display: none;
+}
+
+#label-table-twt td {
+    background-color: #f2f2f2;
+}
+
+#label-table-inv tbody tr {
+    display: none;
+}
+
+#label-table-inv td {
+    background-color: #f2f2f2;
+}
+
+#label-table-tlg tbody tr {
+    display: none;
+}
+
+#label-table-tlg td {
+    background-color: #f2f2f2;
+}
