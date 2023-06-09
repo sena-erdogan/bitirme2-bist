@@ -1,18 +1,74 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+  <title>Telegram Dosya Yükleme</title>
   <!-- Favicon -->
   <link rel="shortcut icon" href="{{url_for('static', filename='images/borsa_istanbul_logo.png')}}">
 </head>
+
 <body>
+  <style>
+    header {
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0; /* Optional: Remove default margin */
+    }
+  </style>
+  <header>
+    <br><h1>Dosya Yükleme Telegram</h1><br>
+  </header>
   <div id="dropzone">
     <p>Drag and drop a file here or click to select a file:</p>
     <input type="file" id="fileinput">
   </div>
 
+  <form id="dataForm">
+    <div>
+      <label for="date">Date:</label>
+      <input type="text" id="date" name="date" required>
+    </div>
+
+    <div>
+      <label for="comment_id">Comment ID:</label>
+      <input type="text" id="comment_id" name="comment_id" required>
+    </div>
+
+    <div>
+      <label for="link">Link:</label>
+      <input type="text" id="link" name="link" required>
+    </div>
+
+    <div>
+      <label for="user_first_name">User First Name:</label>
+      <input type="text" id="user_first_name" name="user_first_name" required>
+    </div>
+
+    <div>
+      <label for="user_last_name">User Last Name:</label>
+      <input type="text" id="user_last_name" name="user_last_name" required>
+    </div>
+
+    <div>
+      <label for="user_id">User ID:</label>
+      <input type="text" id="user_id" name="user_id" required>
+    </div>
+
+    <div>
+      <label for="content">Content:</label>
+      <textarea id="content" name="content" required></textarea>
+    </div>
+
+    <button type="submit" id="submitBtn" disabled>Submit</button>
+  </form>
+
   <script>
     var dropzone = document.getElementById('dropzone');
     var fileinput = document.getElementById('fileinput');
+    var dataForm = document.getElementById('dataForm');
+    var submitBtn = document.getElementById('submitBtn');
 
     dropzone.ondragover = function () {
       this.classList.add('dragover');
@@ -36,6 +92,18 @@
       var file = event.target.files[0];
       console.log('File selected:', file.name);
     };
+
+    dataForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var formData = new FormData(this);
+      console.log('Form submitted:', Object.fromEntries(formData));
+      // Perform further processing or send the form data to the server
+    });
+
+    // Enable or disable the submit button based on form validity
+    dataForm.addEventListener('input', function () {
+      submitBtn.disabled = !dataForm.checkValidity();
+    });
   </script>
 
   <style>
@@ -49,6 +117,11 @@
     #dropzone.dragover {
       background-color: #f0f0f0;
     }
+
+    div {
+      margin-bottom: 10px;
+    }
   </style>
 </body>
+
 </html>

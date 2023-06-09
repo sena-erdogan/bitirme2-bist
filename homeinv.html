@@ -2,6 +2,7 @@
 
 <html>
   <head>
+    <title>Veri Görüntüleme tr.investing</title>
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{url_for('static', filename='images/borsa_istanbul_logo.png')}}">
 
@@ -24,6 +25,18 @@
     <script type = "text/javascript"  src="https://cdn.datatables.net/plug-ins/1.10.15/dataRender/datetime.js"></script>
 </head>
   <body>
+    <style>
+      header {
+        text-align: center;
+      }
+  
+      header h1 {
+        margin: 0; /* Optional: Remove default margin */
+      }
+    </style>
+    <header>
+      <br><h1>tr.investing Verileri</h1><br>
+    </header>
     <div class="card">
       <div class="card-body">
         <form method="post">

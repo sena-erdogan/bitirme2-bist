@@ -18,16 +18,6 @@
   <script type="text/javascript"
     src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Datatable -->
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-  <link rel="stylesheet" type="text/css"
-    href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-  <script type="text/javascript"
-    src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.15/dataRender/datetime.js"></script>
-
   <style>
     body {
       margin: 0;
@@ -38,100 +28,125 @@
       height: 100vh;
     }
 
-    .top-left,
-    .top-right,
-    .bottom-left,
-    .bottom-right {
-      position: absolute;
-      width: 50%;
-      height: 50%;
+    .container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .selection-container {
       display: flex;
       justify-content: center;
-      align-items: center;
-    }
-
-    .top-left {
-      top: 0;
-      left: 0;
-      background-color: #dddddd;
-    }
-
-    .bottom-left {
-      bottom: 0;
-      left: 0;
-      background-color: #f2f2f2;
-    }
-
-    .top-right {
-      top: 0;
-      right: 0;
-      background-color: #f2f2f2;
-    }
-
-    .bottom-right {
-      bottom: 0;
-      right: 0;
-      background-color: #dddddd;
-    }
-
-    .section-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
       margin-bottom: 2rem;
     }
 
-    .section-content h1 {
-      margin-bottom: 1rem;
-      font-size: 2rem;
+    .action-container,
+    .platform-container {
+      width: 40%;
+      margin-right: 2rem;
     }
 
-    .homebutton {
-      margin-top: 1rem;
+    .platform-container {
+      margin-right: 0;
+    }
+
+    .selection-box {
+      margin-bottom: 2rem;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: rgb(89, 196, 220);
+    }
+
+    .selection-box label {
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+    }
+
+    .action-selection {
+      margin-bottom: 1rem;
+    }
+
+    .platform-selection {
+      margin-bottom: 1rem;
+    }
+
+    .button-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin-top: 2rem;
     }
   </style>
 </head>
 
 <body>
-  <div class="page">
-    <div class="top-left">
-      <div class="section-content">
-        <h1>Veri Görüntülemek İçin Platform Seçin</h1>
+  <div class="container">
+    <div class="section-content">
+      <div class="selection-container">
+        <div class="action-container">
+          <h1>İşlem Seçin:</h1>
+          <div class="selection-box">
+            <div class="action-selection">
+              <input type="radio" id="view-action" name="action" value="home">
+              <label for="view-action">Veri Görüntüleme</label>
+            </div>
 
-        <a href="hometwt.html" class="homebutton">Twitter</a>
-        <a href="hometlg.html" class="homebutton">Telegram</a>
-        <a href="homeinv.html" class="homebutton">tr.investing</a>
+            <div class="action-selection">
+              <input type="radio" id="label-action" name="action" value="label">
+              <label for="label-action">Veri Etiketleme</label>
+            </div>
+
+            <div class="action-selection">
+              <input type="radio" id="upload-action" name="action" value="fileupload">
+              <label for="upload-action">Dosya Yükleme</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="platform-container">
+          <h1>Platform Seçin:</h1>
+          <div class="selection-box">
+            <div class="platform-selection">
+              <input type="radio" id="twitter-platform" name="platform" value="twt">
+              <label for="twitter-platform">Twitter</label>
+            </div>
+
+            <div class="platform-selection">
+              <input type="radio" id="telegram-platform" name="platform" value="tlg">
+              <label for="telegram-platform">Telegram</label>
+            </div>
+
+            <div class="platform-selection">
+              <input type="radio" id="investing-platform" name="platform" value="inv">
+              <label for="investing-platform">tr.investing</label>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="top-right">
-      <div class="section-content">
-        <h1><br>Veri Etiketlemek İçin Platform Seçin</h1>
 
-        <a href="labeltwt.html" class="homebutton">Twitter</a>
-        <a href="labeltlg.html" class="homebutton">Telegram</a>
-        <a href="labelinv.html" class="homebutton">tr.investing</a>
-      </div>
-    </div>
-
-    <div class="bottom-left">
-      <div class="section-content">
-        <h1><br>Dosya Yüklemek İçin Platform Seçin</h1>
-
-        <a href="fileuploadtwt.html" class="homebutton">Twitter</a>
-        <a href="fileuploadtlg.html" class="homebutton">Telegram</a>
-        <a href="fileuploadinv.html" class="homebutton">tr.investing</a>
-      </div>
-    </div>
-
-    <div class="bottom-right">
-      <div class="section-content">
-        <h1><br>Piyasa Verisi Yükleyin</h1>
-
-        <a href="hometwt.html" class="homebutton">Piyasa</a>
+      <div class="button-section">
+        <a class="homebutton" onclick="redirectToSelectedPage()">Yönlendir</a>
       </div>
     </div>
   </div>
+
+  <script>
+    function redirectToSelectedPage() {
+      const action = document.querySelector('input[name="action"]:checked');
+      const platform = document.querySelector('input[name="platform"]:checked');
+
+      if (action && platform) {
+        const actionValue = action.value;
+        const platformValue = platform.value;
+
+        const url = `${actionValue}${platformValue}.html`;
+        window.location.href = url;
+      } else {
+        alert("Lütfen işlem ve platform seçimlerinizi tamamlayın.");
+      }
+    }
+  </script>
 </body>
 
 </html>
