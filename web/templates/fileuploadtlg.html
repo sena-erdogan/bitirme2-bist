@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Add the back button -->
+  <button id="back-btn" onclick="location.href='/';">Ana Sayfaya Dön</button>
+  <title>Telegram Dosya Yükleme</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="{{url_for('static', filename='images/borsa_istanbul_logo.png')}}">
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0"></script>
+</head>
+
+<body>
+  <style>
+    header {
+      text-align: center;
+      color: white;
+      background-color: rgb(0, 159, 195);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 30px;
+    }
+
+    #back-btn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      background-color: #f0f0f0;
+      border: none;
+      border-radius: 5px;
+    }
+
+    #back-btn:hover {
+      background-color: #e0e0e0;
+    }
+  </style>
+  <header>
+    <br>
+    <h1>Dosya Yükleme Telegram</h1><br>
+  </header>
+  <div id="dropzone">
+    <p>Drag and drop a file here or click to select a file:</p>
+    <form action="/predicttlg" method="post" enctype="multipart/form-data">
+      <input type="file" name="files" placeholder="Dosya Seçin">
+    </form>
+  </div>
+
+  <form id="dataForm">
+    <div>
+      <label for="comment_id">Comment ID:</label>
+      <input type="text" id="comment_id" name="comment_id" required>
+    </div>
+
+    <div>
+      <label for="content">Content:</label>
+      <textarea id="content" name="content" required></textarea>
+    </div>
+
+    <div>
+      <label for="date">Date:</label>
+      <input type="text" id="date" name="date" required>
+    </div>
+
+    <div>
+      <label for="link">Link:</label>
+      <input type="text" id="link" name="link" required>
+    </div>
+
+    <button type="submit" id="submitBtn" disabled>Submit</button>
+  </form>
+
+  <script>
+    var dropzone = document.getElementById('dropzone');
+    var fileinput = document.querySelector('input[name="files"]');
+    var dataForm = document.getElementById('dataForm');
+    var submitBtn = document.getElementById('submitBtn');
+
+    function checkValidity(row) {
+      console.log('checkValidity() called');
+
+      var commentIdValue = row.comment_id;
+      var contentValue = row.content;
+      var dateValue = row.date;
+      var linkValue = row.link;
+
+      // Check comment_id validity (must be a 32 char)
+      if (!/^.{32}$/.test(commentIdValue)) {
+        console.log('Invalid comment_id:', commentIdValue);
+        return false;
+      }
+
+      // Check link validity (must be in the format of http://t.me/username/number)
+      if (!/^http:\/\/t\.me\/\w+\/\d+$/.test(linkValue)) {
+        console.log('Invalid link:', linkValue);
+        return false;
+      }
+
+      // Check date validity (must be in the format of '2022-04-28 12:40:48')
+      if (!/^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})$/.test(dateValue)) {
+        console.log('Invalid dateValue:', dateValue);
+        return false;
+      }
+
+      // No specific requirements for username and content
+
+      // If row data is valid, send it to the server
+      sendRowDataToServer(row);
+
+      return true;
+    }
+
+    function sendRowDataToServer(row) {
+      console.log('Sending row data to server:', row);
+
+      // Create a FormData object with the row data
+      var formData = new FormData();
+      formData.append('comment_id', row.comment_id);
+      formData.append('content', row.content);
+      formData.append('date', row.date);
+      formData.append('link', row.link);
+
+      // Send the form data to the server
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/saveFormDatatlg', true);
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          console.log('Row data submitted successfully');
+          console.log('Response:', xhr.responseText);
+        } else {
+          console.log('Row data submission failed with status', xhr.status);
+        }
+      };
+      xhr.send(formData);
+    }
+
+    fileinput.addEventListener('change', () => {
+      console.log('change called');
+      var file = fileinput.files[0];
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var csvData = e.target.result;
+        var parsedData = Papa.parse(csvData, { header: true });
+        var validFormData = [];
+        parsedData.data.forEach(function (row) {
+          console.log('row:', row);
+          if (
+            row.hasOwnProperty('comment_id') &&
+            row.hasOwnProperty('content') &&
+            row.hasOwnProperty('date') &&
+            row.hasOwnProperty('link')
+          ) {
+            if (
+              checkValidity(row)
+            ) {
+              console.log('data is valid');
+              validFormData.push(row);
+            } else {
+              console.log('Invalid row data:', row);
+            }
+          } else {
+            console.log('Missing required attributes in row:', row);
+          }
+        });
+
+        // Submit the valid form data to the server
+        if (validFormData.length > 0) {
+          var formData = new FormData();
+          validFormData.forEach(function (element) {
+            formData.append(element.name, element.value);
+          });
+
+          console.log('Form submitted:', Object.fromEntries(formData));
+
+          // Additional step: Send the form data to the server
+          var xhr = new XMLHttpRequest();
+          xhr.open('POST', '/saveFormDatatlg', true);
+          xhr.onload = function () {
+            if (xhr.status === 200) {
+              console.log('Form submitted successfully');
+              console.log('Response:', xhr.responseText);
+            } else {
+              console.log('Form submission failed with status', xhr.status);
+            }
+          };
+          xhr.send(formData);
+        }
+      };
+      reader.readAsText(file);
+    });
+
+    dropzone.ondragover = function () {
+      this.classList.add('dragover');
+      return false;
+    };
+
+    dropzone.ondragleave = function () {
+      this.classList.remove('dragover');
+      return false;
+    };
+
+    dropzone.ondrop = function (event) {
+      this.classList.remove('dragover');
+      event.preventDefault();
+      var file = event.dataTransfer.files[0];
+      fileinput.files = event.dataTransfer.files;
+      console.log('File dropped:', file.name);
+    };
+
+    fileinput.onchange = function (event) {
+      var file = event.target.files[0];
+      console.log('File selected:', file.name);
+    };
+
+    // Add a submit event listener to the form
+    dataForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      // Loop through each row of data in the CSV file
+      parsedData.data.forEach(function (row) {
+        if (
+          row.hasOwnProperty('comment_id') &&
+          row.hasOwnProperty('content') &&
+          row.hasOwnProperty('date') &&
+          row.hasOwnProperty('link')
+        ) {
+          // Validate the row data using the checkValidity() function
+          if (checkValidity(row)) {
+            // If the row data is valid, send it to the server
+            var formData = new FormData();
+            formData.append('comment_id', row.comment_id);
+            formData.append('content', row.content);
+            formData.append('date', row.date);
+            formData.append('link', row.link);
+
+            console.log('Row data submitted:', Object.fromEntries(formData));
+
+            // Send the form data to the server
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/saveFormDatatlg', true);
+            xhr.onload = function () {
+              if (xhr.status === 200) {
+                console.log('Row data submitted successfully');
+              } else {
+                console.log('Row data submission failed with status', xhr.status);
+              }
+            };
+            xhr.send(formData);
+          } else {
+            console.log('Invalid row data:', row);
+          }
+        } else {
+          console.log('Missing required attributes in row:', row);
+        }
+      });
+    });
+  </script>
+
+  <style>
+    #dropzone {
+      padding: 20px;
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    #dropzone.dragover {
+      background-color: #f0f0f0;
+    }
+
+    div {
+      margin-bottom: 10px;
+    }
+  </style>
+</body>
+
+</html>

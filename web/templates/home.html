@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="{{url_for('static', filename='images/borsa_istanbul_logo.png')}}">
+
+  <!-- JQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" type="text/css"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript"
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .selection-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .action-container,
+    .platform-container {
+      width: 40%;
+      margin-right: 2rem;
+    }
+
+    .platform-container {
+      margin-right: 0;
+    }
+
+    .selection-box {
+      margin-bottom: 2rem;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: rgb(89, 196, 220);
+    }
+
+    .selection-box label {
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+    }
+
+    .action-selection,
+    .platform-selection {
+      margin-bottom: 1.5rem;
+      font-size: 20px;
+      color: white;
+    }
+
+    .button-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin-top: 2rem;
+    }
+
+    .homebutton {
+      display: inline-block;
+      padding: 1em 2em;
+      /* increase padding values */
+      background-color: rgb(0, 159, 195);
+      color: white;
+      border-radius: 5px;
+      border: none;
+      font-size: 20px;
+      font-weight: bold;
+      /* increase font size */
+    }
+
+    .homebutton:hover {
+      background-color: rgba(0, 159, 195, 0.479);
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="section-content">
+      <div class="selection-container">
+        <div class="action-container">
+          <h1 style="background-color: rgb(0, 159, 195);
+          color: white;
+          font-size: 30px;
+          background-size: cover;
+          padding: 20px 0;">İşlem Seçin:</h1>
+          <div class="selection-box">
+            <div class="action-selection">
+              <input type="radio" id="view-action" name="action" value="home">
+              <label for="view-action">Veri Görüntüleme</label>
+            </div>
+
+            <div class="action-selection">
+              <input type="radio" id="label-action" name="action" value="label">
+              <label for="label-action">Veri Etiketleme</label>
+            </div>
+
+            <div class="action-selection">
+              <input type="radio" id="upload-action" name="action" value="fileupload">
+              <label for="upload-action">Dosya Yükleme</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="platform-container">
+          <h1 style="background-color: rgb(0, 159, 195);
+          color: white;
+          font-size: 30px;
+          background-size: cover;
+          padding: 20px 0;">Platform Seçin:</h1>
+          <div class="selection-box">
+            <div class="platform-selection">
+              <input type="radio" id="twitter-platform" name="platform" value="twt">
+              <label for="twitter-platform">Twitter</label>
+            </div>
+
+            <div class="platform-selection">
+              <input type="radio" id="telegram-platform" name="platform" value="tlg">
+              <label for="telegram-platform">Telegram</label>
+            </div>
+
+            <div class="platform-selection">
+              <input type="radio" id="investing-platform" name="platform" value="inv">
+              <label for="investing-platform">tr.investing</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="button-section">
+        <button class="homebutton" onclick="redirectToSelectedPage()">Yönlendir</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function redirectToSelectedPage() {
+      const action = document.querySelector('input[name="action"]:checked');
+      const platform = document.querySelector('input[name="platform"]:checked');
+
+      if (action && platform) {
+        const actionValue = action.value;
+        const platformValue = platform.value;
+
+        const url = `${actionValue}${platformValue}.html`;
+        window.location.href = url;
+      } else {
+        alert("Lütfen işlem ve platform seçimlerinizi tamamlayın.");
+      }
+    }
+  </script>
+</body>
+
+</html>
