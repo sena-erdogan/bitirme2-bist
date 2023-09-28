@@ -2,6 +2,7 @@
 #PRETRAINING CODE#
 ##################
 
+
 import pandas as pd
 import torch
 from transformers import AutoTokenizer, AutoModelForMaskedLM, AdamW, get_linear_schedule_with_warmup
@@ -80,9 +81,11 @@ for epoch in range(mlm_epochs):
 mlm_model_path = "/content/drive/MyDrive/ColabNotebookModels/mlmmodel.pth"
 mlm_model.save_pretrained(mlm_model_path)
 
-#####################
+
+#################################
 #MODEL TRAINING - FINETUNIG CODE#
-#####################
+#################################
+
 
 import pandas as pd
 import torch
@@ -259,6 +262,7 @@ plt.show()
 #STARLANG SPELL CHECKING CODE#
 ##############################
 
+
 import pandas as pd
 from Corpus.Sentence import Sentence
 from MorphologicalAnalysis.FsmMorphologicalAnalyzer import FsmMorphologicalAnalyzer
@@ -302,3 +306,4 @@ for index, row in unlabeled_data.iterrows():
 unlabeled_data.to_csv('train_spellchecked.csv', index=False)
 
 print("Spell checking and preprocessing completed.     Preprocessed data saved in preprocessed_spellchecked.csv")
+
