@@ -1,4 +1,4 @@
-# bitirme2-bist
+# stock-market-manipulation
 
 ## Setup & Installation
 
